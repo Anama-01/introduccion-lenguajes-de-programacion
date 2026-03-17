@@ -1,0 +1,84 @@
+---
+title: "Introducción a Python, R y Julia"
+author: "Anamaria Rodríguez Ramirez"
+date: today
+execute:
+  encoding: UTF-8
+format:
+  html:
+    html-math-method: mathjax
+    charset: utf-8
+    toc: true
+    number-sections: true
+    theme: cosmo
+  pdf:
+    toc: true
+    toc-title: "Contenido"
+    number-sections: true
+    documentclass: scrreprt
+    geometry:
+      - top=25mm
+      - left=25mm
+      - right=25mm
+      - bottom=25mm
+lang: es
+bibliography: referencias.bib     # Archivo BibTeX con todas las referencias
+---
+
+# Introducción a Python, R y Julia
+
+En el presente documento se presentara el desarrollo de los ejercicios propuestos en el libro [@rodriguez2026sig], en el capítulo de **Introducción a Python, R y Julia**, donde se trabajaron dataframes, a los cuales se le realizaron modificaciones en los datos, y graficación en `barplot` de los mismos. 
+
+## Sobre el Ejercicio 1 (Vectorización). 
+ - Intenta explicar qué sucedería si decides hacer este ejercicio en **Python** y creas `caudales_m3s` como una Lista nativa `([1500, 2100...])` y la multiplicas directamente por 1000 (caudales_m3s * 1000). ¿Realizaría la operación matemática deseada? ¿Qué librería de **Python** soluciona este problema y cómo se diferencia este comportamiento del de **R** o **Julia**?
+
+En Python no se realiza la operación matemática deseada, ya que cuando se multiplica directamente una lista, lo que hace el lenguaje es replicar la lista que se está operando por la cantidad de veces del número escalar por el cuál se opera. Esto se debe a que la vectorización en **Python** a diferencia de **R** y **Julia**, no es nativa, por lo que requiere que se llame una libreria (`numpy` o `pandas`) para poder realizar esta operación. Por su parte, **R** al tener su vectorización automática, las operaciones las realiza a los vectores directamente a cada uno de los elementos, devolviendo un nuevo vector. En el caso de **Julia**, se requiere añadir un punto `.+` o  `.*`, para indicarle que realice la operación deseada a cada elemento del vector. 
+
+## Pregunta General (Indexación).
+- Escribe la línea de código exacta que usarías en tu lenguaje elegido para extraer las tres primeras estaciones del DataFrame del Ejercicio 2 usando indexación por rangos (slicing). Explica brevemente si el límite superior del rango que escribiste se incluye o se excluye en el resultado final, justificando esto según el tipo de indexación (Base-0 vs Base-1) de tu lenguaje.
+
+```{python}
+#| eval: false
+## En Pandas
+df_aire.iloc[0:3]
+```
+
+En **Python**, el límite superior se excluye, dado que parte de Base-0, por lo que, de acuerdo al Slicing se toma las filas 1, 2 y 3 correspondientes a los elementos [0], [1], [2].
+
+```{r}
+#| eval: false
+df_aire[1:3, :]
+```
+
+En **R**, al igual que en Julia, al partir de Base-1, incluye ambos extremos, tanto el límite superior como el inferior, dando las filas 1, 2 y 3.
+
+```{julia}
+#| eval: false
+df_aire[1:3, :]
+```
+
+Igual que en **R**, se parte de la Base-1, incluye los extremos y brinda las filas 1, 2 y 3.
+
+# Codigos
+
+Los códigos ejecutados para el desarrollo de este ejercicio fueron los siguientes:
+
+## Python
+
+El código puede ser consultado en el siguiente archivo:
+
+[Script de Python](introduccionpy.py)
+
+## R
+
+El código puede ser consultado en el siguiente archivo:
+
+[Script de R](introduccionR.R)
+
+## Julia
+
+El código puede ser consultado en el siguiente archivo:
+
+[Script de Julia](introduccionjl.jl)
+
+# Referencias 
